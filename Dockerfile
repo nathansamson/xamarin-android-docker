@@ -5,7 +5,7 @@ RUN apt-get update \
         && echo "deb http://download.mono-project.com/repo/debian wheezy main" > /etc/apt/sources.list.d/mono-xamarin.list \
         && wget -qO - http://download.mono-project.com/repo/xamarin.gpg | apt-key add - \
         && apt-get update \
-        && apt-get install mono-devel nuget referenceassemblies-pcl -y --no-install-recommends \
+        && apt-get install mono-devel msbuild nuget referenceassemblies-pcl -y --no-install-recommends \
         && apt-get purge wget -y \
         && apt-get autoremove -y \
         && apt-get clean \
