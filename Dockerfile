@@ -1,6 +1,6 @@
 FROM fedora:25
 
-RUN dnf install gnupg wget dnf-plugins-core python -y  \
+RUN dnf install gnupg wget dnf-plugins-core python bzip2 -y  \
 	&& rpm --import "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF" \
 	&& dnf config-manager --add-repo http://download.mono-project.com/repo/centos7/ \
         && dnf install libzip mono-devel nuget msbuild referenceassemblies-pcl -y \
