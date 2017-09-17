@@ -17,12 +17,12 @@ RUN mkdir -p /android/sdk && \
 RUN cd /android/sdk && \
     yes | ./tools/bin/sdkmanager 'build-tools;25.0.3' platform-tools 'platforms;android-25' 'ndk-bundle'
 
-RUN curl -L https://jenkins.mono-project.com/view/Xamarin.Android/job/xamarin-android-linux/515/Azure/processDownloadRequest/xamarin-android/oss-xamarin.android_v7.4.99.139_Linux-x86_64_HEAD_1242e19.tar.bz2 \
-        -o oss-xamarin.android.tar.bz2 && \
-    tar xjf oss-xamarin.android.tar.bz2 && \
-    mv oss-xamarin.android_v7.4.99.139_Linux-x86_64_HEAD_1242e19 /android/xamarin && \
+RUN curl -L https://jenkins.mono-project.com/view/Xamarin.Android/job/xamarin-android-linux/373/Azure/processDownloadRequest/xamarin-android/oss-xamarin.android_v7.3.99.59_Linux-x86_64_master_4799ea2.zip \
+        -o oss-xamarin.android_v7.3.99.59_Linux-x86_64_master_4799ea2.zip && \
+    unzip -q oss-xamarin.android_v7.3.99.59_Linux-x86_64_master_4799ea2.zip  && \
+    mv oss-xamarin.android_v7.3.99.59_Linux-x86_64_master_4799ea2 /android/xamarin && \
     ln -s /android/xamarin/bin/Debug/lib/xbuild-frameworks/MonoAndroid/ /usr/lib/mono/xbuild-frameworks/MonoAndroid && \
-    rm oss-xamarin.android.tar.bz2
+    rm oss-xamarin.android_v7.3.99.59_Linux-x86_64_master_4799ea2.zip
 
 ENV ANDROID_NDK_PATH=/android/sdk/ndk-bundle
 ENV ANDROID_SDK_PATH=/android/sdk/
