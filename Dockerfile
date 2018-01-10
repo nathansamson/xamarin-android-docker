@@ -24,7 +24,6 @@ RUN curl -L $(cat link.txt) \
         -o xamarin.tar.bz2
 RUN bzip2 -cd xamarin.tar.bz2 | tar -xvf -
 RUN mv oss-xamarin.android_v* /android/xamarin && \
-    ln -s /android/xamarin/bin/Debug/lib/xbuild-frameworks/MonoAndroid/ /usr/lib/mono/xbuild-frameworks/MonoAndroid && \
     rm xamarin.tar.bz2
     
 ENV ANDROID_NDK_PATH=/android/sdk/ndk-bundle
