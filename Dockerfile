@@ -1,4 +1,4 @@
-FROM fedora:25
+FROM fedora:27
 
 RUN dnf install gnupg wget dnf-plugins-core -y  \
 	&& rpm --import "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF" \
@@ -19,7 +19,7 @@ RUN cd /android/sdk && \
     ./tools/bin/sdkmanager 'build-tools;23.0.3' platform-tools 'platforms;android-23' 'ndk-bundle'
 
 RUN dnf install lynx -y
-RUN lynx listonly -dump https://jenkins.mono-project.com/view/Xamarin.Android/job/xamarin-android-linux/lastSuccessfulBuild/Azure/ | grep -o "https://.*/Azure/processDownloadRequest/xamarin-android/oss-xamarin.android_v.*" > link.txt
+RUN lynx -listonly -dump https://jenkins.mono-project.com/view/Xamarin.Android/job/xamarin-android-linux/lastSuccessfulBuild/Azure/ | grep -o "https://.*/Azure/processDownloadRequest/xamarin-android/oss-xamarin.android_v.*" > link.txt
 RUN curl -L $(cat link.txt) \
         -o xamarin.tar.bz2
 RUN bzip2 -cd xamarin.tar.bz2 | tar -xvf -
