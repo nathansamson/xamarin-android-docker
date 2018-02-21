@@ -3,7 +3,7 @@ FROM fedora:27
 RUN dnf install gnupg wget dnf-plugins-core -y  \
 	&& rpm --import "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF" \
 	&& dnf config-manager --add-repo http://download.mono-project.com/repo/centos7/ \
-        && dnf install libzip bzip2 bzip2-libs mono-devel nuget msbuild referenceassemblies-pcl -y \
+        && dnf install libzip bzip2 bzip2-libs mono-devel nuget msbuild referenceassemblies-pcl lynx -y \
         && dnf clean all
 
 RUN dnf install curl unzip java-1.8.0-openjdk-headless java-1.8.0-openjdk-devel -y && \
@@ -16,9 +16,8 @@ RUN mkdir -p /android/sdk && \
 
 RUN cd /android/sdk && \
     yes | ./tools/bin/sdkmanager --licenses && \
-    ./tools/bin/sdkmanager 'build-tools;23.0.3' platform-tools 'platforms;android-23' 'ndk-bundle'
+    ./tools/bin/sdkmanager 'build-tools;26.0.2' platform-tools 'platforms;android-26' 'ndk-bundle'
 
-RUN dnf install lynx -y
 RUN lynx -listonly -dump https://jenkins.mono-project.com/view/Xamarin.Android/job/xamarin-android-linux/lastSuccessfulBuild/Azure/ | grep -o "https://.*/Azure/processDownloadRequest/xamarin-android/oss-xamarin.android_v.*" > link.txt
 RUN curl -L $(cat link.txt) \
         -o xamarin.tar.bz2
